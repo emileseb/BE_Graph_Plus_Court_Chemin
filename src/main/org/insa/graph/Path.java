@@ -202,7 +202,19 @@ public class Path {
      */
     public boolean isValid() {
         // TODO:
-        return false;
+    	boolean valid = false;
+    	boolean recurrence =false;
+    	if (!arcs.isEmpty() && arcs.get(0).getOrigin().equals(this.origin)) {
+    		recurrence =true;
+    		int i=0;
+	    	while (i+1<arcs.size() && recurrence){
+	    		recurrence = arcs.get(i).getDestination().equals(arcs.get(i+1).getOrigin());
+	    		i++;
+	    	}
+    	}
+    	if(this.isEmpty() || arcs.isEmpty() || recurrence)
+    		valid = true;
+        return valid;
     }
 
     /**
