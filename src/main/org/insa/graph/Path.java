@@ -248,7 +248,11 @@ public class Path {
      */
     public double getMinimumTravelTime() {
         // TODO:
-        return 0;
+    	float minimumTravelTime = 0;
+    	for (Arc a : this.arcs) {
+    		minimumTravelTime += a.getMinimumTravelTime();
+    	}
+        return minimumTravelTime;
     }
 
 }
