@@ -36,6 +36,7 @@ public class Path {
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
         // TODO:
+        
         return new Path(graph, arcs);
     }
 
@@ -57,6 +58,26 @@ public class Path {
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
         // TODO:
+        if(nodes.size()==1)
+        	return new Path(graph, nodes.get(0));
+        List<Arc> arcsPossible = new ArrayList<Arc>();
+        for(int n = 0;n+1<nodes.size();n++) {
+        	for(Arc a : nodes.get(n).getSuccessors()) {
+        		if(a.getDestination().equals(nodes.get(n+1))) {
+        			arcsPossible.add(a);
+        		}
+        	}
+        	if (arcsPossible.size()==0)
+        		throw new IllegalArgumentException();
+        	arcs.add(arcsPossible.get(0));
+        	for(Arc a : arcsPossible) {
+        		if(a.getLength()<arcs.get(arcs.size()-1).getLength()) {
+        			arcs.set(arcs.size()-1, a);
+        		}
+        	}    
+        	while (arcsPossible.size()>0)
+        		arcsPossible.remove(0);
+        }
         return new Path(graph, arcs);
     }
 
@@ -198,7 +219,6 @@ public class Path {
      * 
      * @return true if the path is valid, false otherwise.
      * 
-     * @deprecated Need to be implemented.
      */
     public boolean isValid() {
         // TODO:
@@ -256,7 +276,6 @@ public class Path {
      * 
      * @return Minimum travel time to travel this path (in seconds).
      * 
-     * @deprecated Need to be implemented.
      */
     public double getMinimumTravelTime() {
         // TODO:
