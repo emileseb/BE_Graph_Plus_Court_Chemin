@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 import org.insa.graph.Graph;
 import org.insa.graph.Path;
 import org.insa.graph.io.BinaryGraphReader;
+import org.insa.graph.io.BinaryPathReader;
 import org.insa.graph.io.GraphReader;
 import org.insa.graph.io.PathReader;
 import org.insa.graphics.drawing.Drawing;
@@ -46,28 +47,31 @@ public class Launch {
     public static void main(String[] args) throws Exception {
 
         // Visit these directory to see the list of available files on Commetud.
-        String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
-        String pathName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Paths/path_fr31insa_rangueil_r2.path";
+        String mapName = "/home/emile/Documents/INSA/sem6/europe/france/haute-garonne.mapgr";
+        String pathName = "/home/emile/Documents/INSA/sem6/path_fr31_insa_bikini_canal.path";
 
         // Create a graph reader.
         GraphReader reader = new BinaryGraphReader(
                 new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
 
-        // TODO: Read the graph.
-        Graph graph = null;
+        // TODO: Read the graph. Fait
+        Graph graph = reader.read();
 
         // Create the drawing:
         Drawing drawing = createDrawing();
 
-        // TODO: Draw the graph on the drawing.
+        // TODO: Draw the graph on the drawing.FAIT
+        drawing.drawGraph(graph);
 
-        // TODO: Create a PathReader.
-        PathReader pathReader = null;
+        // TODO: Create a PathReader.Presque Fait
+        PathReader pathReader = new BinaryPathReader(
+        		new DataInputStream(new BufferedInputStream(new FileInputStream(pathName))));
 
-        // TODO: Read the path.
-        Path path = null;
+        // TODO: Read the path. FAIT
+        Path path = pathReader.readPath(graph);
 
-        // TODO: Draw the path.
+        // TODO: Draw the path.  FAIT
+        drawing.drawPath(path);
 
     }
 

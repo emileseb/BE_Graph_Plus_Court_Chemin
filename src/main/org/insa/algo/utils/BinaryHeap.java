@@ -141,10 +141,35 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         this.arraySet(index, x);
         this.percolateUp(index);
     }
+    
+// a finir, il faut trouver l'élément dans l'arbre sans utiliser IndexOf et le supprimer
+    public int find(E x) throws ElementNotFoundException{ //retourne l'index de l'élément enlevé
+    	int N=0;
+    	int index=-1;
+    	boolean trouve = false;
+    	if (this.isEmpty()) {
+    		throw new ElementNotFoundException(x);
+    	}
+    	while (!trouve && (N<this.currentSize)) {
+    		if(this.array.get(N).equals(x)) {
+    			trouve = true;
+    			index = N;
+    		}
+    		N++;    			
+    	}
+    	if(index ==-1) 
+    			throw new ElementNotFoundException(x);
+    	return index;
+    }
 
     @Override
     public void remove(E x) throws ElementNotFoundException {
-        // TODO:
+        // TODO
+        for (int index = find(x); index > 0; index = index_parent(index)) {
+            E moving_val = this.array.get(index_parent(index));
+            this.arraySet(index, moving_val);
+        }
+        this.deleteMin();
     }
 
     @Override
