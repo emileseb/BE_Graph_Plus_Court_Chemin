@@ -142,7 +142,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         this.percolateUp(index);
     }
     
-// a finir, il faut trouver l'élément dans l'arbre sans utiliser IndexOf et le supprimer
+    
     public int find(E x) throws ElementNotFoundException{ //retourne l'index de l'élément enlevé
     	int N=0;
     	int index=-1;
