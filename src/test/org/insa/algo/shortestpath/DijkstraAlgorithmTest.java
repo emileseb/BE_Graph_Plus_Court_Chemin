@@ -11,6 +11,7 @@ import org.insa.algo.ArcInspector;
 import org.insa.algo.ArcInspectorFactory;
 import org.insa.graph.Graph;
 import org.insa.graph.Node;
+import org.insa.graph.Path;
 import org.insa.graph.io.BinaryGraphReader;
 import org.insa.graph.io.GraphReader;
 import org.junit.Test;
@@ -33,6 +34,8 @@ public class DijkstraAlgorithmTest {
     
     private static DijkstraAlgorithm dijAlg1, dijAlg2, dijAlg3, dijAlg4;
     
+    private static Path p1, p2, p3, p4;
+    
 	public static void initAll() throws IOException {
 		hotGaronne = "/home/emile/Documents/INSA/sem6/europe/france/haute-garonne.mapgr"; //des cartes chaudes de ta région
 		hotNormandie = "/home/emile/Documents/INSA/sem6/europe/france/haute-normandie.mapgr";  //il fait quand même moins chaud qu'à Toulouse
@@ -48,21 +51,25 @@ public class DijkstraAlgorithmTest {
 		arcinsp1 = ArcInspectorFactory.getAllFilters().get(0);
 		arcinsp2 = ArcInspectorFactory.getAllFilters().get(2);
 		
-        R1classiqueA1T = new ShortestPathData(Graph, nodes[1], nodes[6], arcinsp1);
-        NRclassiqueA1T = new ShortestPathData(arcinsp1);
-        R1classiqueA2D = new ShortestPathData(arcinsp2);
-        NRclassiqueA2D = new ShortestPathData(arcinsp2);
+        R1classiqueA1T = new ShortestPathData(grR1, grR1.getNodes().get(0), grR1.getNodes().get(0), arcinsp1);
+        NRclassiqueA1T = new ShortestPathData(grNR,grNR.getNodes().get(0), grNR.getNodes().get(1),arcinsp1);
+        R1classiqueA2D = new ShortestPathData(grR1,grR1.getNodes().get(0), grR1.getNodes().get(6),arcinsp2);
+        NRclassiqueA2D = new ShortestPathData(grNR,grNR.getNodes().get(0), grNR.getNodes().get(1),arcinsp2);
         
-        dijAlg1 = new ;
-        dijAlg2 = ;
-        dijAlg3 = ;
-        dijAlg4 = ;
+        dijAlg1 = new DijkstraAlgorithm(R1classiqueA1T) ; //il faut les .doRun() pour obtenir le shortest path solution 
+        dijAlg2 = new DijkstraAlgorithm(NRclassiqueA1T);
+        dijAlg3 = new DijkstraAlgorithm(R1classiqueA2D);
+        dijAlg4 = new DijkstraAlgorithm(NRclassiqueA2D);
         
+        p1 = dijAlg1.doRun().getPath();
+        p2 = dijAlg2.doRun().getPath();
+        p3 = dijAlg3.doRun().getPath();
+        p4 = dijAlg4.doRun().getPath();
 	}
 	
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+	
 	}
 
 }
