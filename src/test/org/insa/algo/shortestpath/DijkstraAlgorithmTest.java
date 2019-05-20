@@ -14,6 +14,7 @@ import org.insa.graph.Node;
 import org.insa.graph.Path;
 import org.insa.graph.io.BinaryGraphReader;
 import org.insa.graph.io.GraphReader;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DijkstraAlgorithmTest {
@@ -36,6 +37,7 @@ public class DijkstraAlgorithmTest {
     
     private static Path p1, p2, p3, p4;
     
+    @BeforeClass
 	public static void initAll() throws IOException {
 		hotGaronne = "/home/emile/Documents/INSA/sem6/europe/france/haute-garonne.mapgr"; //des cartes chaudes de ta région
 		hotNormandie = "/home/emile/Documents/INSA/sem6/europe/france/haute-normandie.mapgr";  //il fait quand même moins chaud qu'à Toulouse
@@ -68,12 +70,15 @@ public class DijkstraAlgorithmTest {
 	}
 	
 	@Test
-	public void test() {
+	public void testIsValid() {
 		assertTrue(p1.isValid());
 		assertTrue(p2.isValid());
 		assertTrue(p3.isValid());
 		assertTrue(p4.isValid());
-		
+	}
+	
+	@Test
+	public void testOrigDest() {
 		assertTrue(p1.getOrigin().equals(dijAlg1.getInputData().getOrigin()));
 		assertTrue(p1.getDestination().equals(dijAlg1.getInputData().getDestination()));
 		assertTrue(p2.getOrigin().equals(dijAlg2.getInputData().getOrigin()));
