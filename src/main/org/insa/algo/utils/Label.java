@@ -5,7 +5,7 @@ import org.insa.graph.*;
 public class Label implements Comparable<Label>{
 	private int sommetCourant; 	// : sommet associé à ce label (sommet ou numéro de sommet).
     private boolean marque;		// : booléen, vrai lorsque le coût min de ce sommet est définitivement connu par l'algorithme.
-    private float cout ; 			// : valeur courante du plus court chemin depuis l'origine vers le sommet.
+    protected float cout ; 			// : valeur courante du plus court chemin depuis l'origine vers le sommet.
     private Arc pere  ;			// : correspond au sommet précédent sur le chemin correspondant au plus court chemin courant. Afin de reconstruire le chemin à la fin de l'algorithme, mieux vaut stocker l'arc plutôt que seulement le père.
     
     public Label(int sommetCourant, boolean marque, float cout, Arc pere) {
@@ -15,7 +15,7 @@ public class Label implements Comparable<Label>{
     	this.pere = pere;
     }
     
-    public float getCost() {
+    public float getTotalCost() {
     	return this.cout;
     }
     
@@ -42,9 +42,9 @@ public class Label implements Comparable<Label>{
     public boolean getMarque() {return this.marque;}
 
     public int compareTo(Label l) {
-    	if (this.cout < l.cout)
+    	if (this.getTotalCost() < l.getTotalCost())
     		return -1;
-    	else if(this.cout > l.cout)
+    	else if(this.getTotalCost() > l.getTotalCost())
     		return 1;
     	else 
     		return 0;
