@@ -14,6 +14,11 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         super(data);
         }
 
+    private static Label newLabel(int sommetCourant, boolean marque, float cout, Arc pere) {
+    	Label l = new Label(sommetCourant, marque, cout, pere);
+    	return l;
+    }
+    
     @Override
     protected ShortestPathSolution doRun() {
     	
@@ -26,7 +31,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     	ArrayList<Arc> arcs= new ArrayList<Arc>();  
     	//Initialisation : L'idée est de remplir un tableau de label DANS L'ORDRE DE 0 a N-1, avec tous les noeuds du graph. 
     	for (Node n: data.getGraph().getNodes()) {	//On suppose que les nodes sont rangés dans l'ordre de leur ID !!!
-    		labelTab.add(new Label(n.getId(),false,Float.POSITIVE_INFINITY,null)); 
+    		labelTab.add(newLabel(n.getId(),false,Float.POSITIVE_INFINITY,null)); 
     	}
     	labelTab.get(data.getOrigin().getId()).setCost(0);
     	labelTas.insert(labelTab.get(data.getOrigin().getId()));
