@@ -15,7 +15,7 @@ public class Label implements Comparable<Label>{
     	this.pere = pere;
     }
     
-    public float getCost() {
+    public float getTotalCost() {
     	return this.cout;
     }
     
@@ -42,9 +42,9 @@ public class Label implements Comparable<Label>{
     public boolean getMarque() {return this.marque;}
 
     public int compareTo(Label l) {
-    	if (this.cout < l.cout)
+    	if (this.getTotalCost() < l.getTotalCost())
     		return -1;
-    	else if(this.cout > l.cout)
+    	else if(this.getTotalCost() > l.getTotalCost())
     		return 1;
     	else 
     		return 0;
