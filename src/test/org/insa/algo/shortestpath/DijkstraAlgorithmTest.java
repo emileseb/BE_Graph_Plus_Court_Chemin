@@ -24,7 +24,7 @@ public class DijkstraAlgorithmTest {
 	// List of nodes
     private static Node[] nodes;
     //nom  : R = routière NR = non Routière; Type de parcours (Noeud origine et dest) ; arc inspector 1 ou 3 : A1 A3; T = temps D = distance
-    private static ShortestPathData R1classiqueA1T, NRclassiqueA1T, R1classiqueA2D, NRclassiqueA2D ;
+    private static ShortestPathData R1singlenodA1T, NRclassiqueA1T, R1classiqueA2D, NRclassiqueA2D ;
     
     // Create a graph reader.
     private static GraphReader R1, R2, NR;
@@ -51,12 +51,12 @@ public class DijkstraAlgorithmTest {
 		arcinsp1 = ArcInspectorFactory.getAllFilters().get(0);
 		arcinsp2 = ArcInspectorFactory.getAllFilters().get(2);
 		
-        R1classiqueA1T = new ShortestPathData(grR1, grR1.getNodes().get(0), grR1.getNodes().get(0), arcinsp1);
+        R1singlenodA1T = new ShortestPathData(grR1, grR1.getNodes().get(0), grR1.getNodes().get(0), arcinsp1);
         NRclassiqueA1T = new ShortestPathData(grNR,grNR.getNodes().get(0), grNR.getNodes().get(1),arcinsp1);
         R1classiqueA2D = new ShortestPathData(grR1,grR1.getNodes().get(0), grR1.getNodes().get(6),arcinsp2);
         NRclassiqueA2D = new ShortestPathData(grNR,grNR.getNodes().get(0), grNR.getNodes().get(1),arcinsp2);
         
-        dijAlg1 = new DijkstraAlgorithm(R1classiqueA1T) ; //il faut les .doRun() pour obtenir le shortest path solution 
+        dijAlg1 = new DijkstraAlgorithm(R1singlenodA1T) ; //il faut les .doRun() pour obtenir le shortest path solution 
         dijAlg2 = new DijkstraAlgorithm(NRclassiqueA1T);
         dijAlg3 = new DijkstraAlgorithm(R1classiqueA2D);
         dijAlg4 = new DijkstraAlgorithm(NRclassiqueA2D);
@@ -69,7 +69,20 @@ public class DijkstraAlgorithmTest {
 	
 	@Test
 	public void test() {
-	
+		assertTrue(p1.isValid());
+		assertTrue(p2.isValid());
+		assertTrue(p3.isValid());
+		assertTrue(p4.isValid());
+		
+		assertTrue(p1.getOrigin().equals(dijAlg1.getInputData().getOrigin()));
+		assertTrue(p1.getDestination().equals(dijAlg1.getInputData().getDestination()));
+		assertTrue(p2.getOrigin().equals(dijAlg2.getInputData().getOrigin()));
+		assertTrue(p2.getDestination().equals(dijAlg2.getInputData().getDestination()));
+		assertTrue(p3.getOrigin().equals(dijAlg3.getInputData().getOrigin()));
+		assertTrue(p3.getDestination().equals(dijAlg3.getInputData().getDestination()));
+		assertTrue(p4.getOrigin().equals(dijAlg4.getInputData().getOrigin()));
+		assertTrue(p4.getDestination().equals(dijAlg4.getInputData().getDestination()));
+
 	}
 
 }

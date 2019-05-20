@@ -15,6 +15,10 @@ public class Label implements Comparable<Label>{
     	this.pere = pere;
     }
     
+    public float getCost() {
+    	return this.cout;
+    }
+    
     public float getTotalCost() {
     	return this.cout;
     }
@@ -38,6 +42,9 @@ public class Label implements Comparable<Label>{
     public void setMarque(boolean bool) {
     	this.marque = bool;
     }
+    
+    
+    public double getHeuristic() {return 0;}
     
     public boolean getMarque() {return this.marque;}
 

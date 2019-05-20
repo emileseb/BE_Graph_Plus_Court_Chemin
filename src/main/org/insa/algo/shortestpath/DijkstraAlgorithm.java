@@ -46,8 +46,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     			if (data.isAllowed(a)){
 	    			Label y = labelTab.get(a.getDestination().getId()); 
 	    			if(!(y.getMarque())) {
-	    				if(y.getTotalCost()>x.getTotalCost()+data.getCost(a)) {
-	    					y.setCost((float) (x.getTotalCost()+data.getCost(a)));
+	    				if(y.getTotalCost()>x.getCost()+data.getCost(a)+y.getHeuristic()) {
+	    					y.setCost((float) (x.getCost()+data.getCost(a)));
 	    					y.setPere(a);
 	    					try {
 	    						labelTas.remove(y);
