@@ -16,6 +16,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
     @Override
     protected ShortestPathSolution doRun() {
+    	
     	ShortestPathData data = getInputData();
     	ShortestPathSolution solution = null;
     	// TODO:
@@ -31,7 +32,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     	labelTas.insert(labelTab.get(data.getOrigin().getId()));
     	this.notifyOriginProcessed(data.getOrigin());
     	//Iterations
-    	while (!labelTab.get(data.getDestination().getId()).getMarque()){	//label de data.dest n'est pas marqué on tourne
+    	while (!labelTab.get(data.getDestination().getId()).getMarque() && !labelTas.isEmpty()){	//label de data.dest n'est pas marqué on tourne
     		Label x = labelTas.deleteMin();
     		x.setMarque(true);
     		this.notifyNodeMarked(data.getGraph().get(x.getSommetCourant()));
@@ -55,6 +56,12 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     			}
     		}
     	}
+    	
+    	if (labelTas.isEmpty() && !labelTab.get(data.getDestination().getId()).getMarque()) {
+    		solution = new ShortestPathSolution(data, Status.INFEASIBLE);
+            return solution;
+    	}
+    	
     	this.notifyDestinationReached(data.getDestination());
     	//creation du chemin
     	Stack<Arc> pile = new Stack<Arc>();
