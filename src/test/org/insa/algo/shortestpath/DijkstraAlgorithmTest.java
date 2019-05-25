@@ -1,5 +1,15 @@
 package org.insa.algo.shortestpath;
 
+public class DijkstraAlgorithmTest extends ShortestPathAlgorithmTest{
+
+    @Override
+    protected ShortestPathAlgorithm createAlgorithm(ShortestPathData data) {
+        return new DijkstraAlgorithm(data);
+    }
+}
+
+/*package org.insa.algo.shortestpath;
+
 import static org.junit.Assert.*;
 
 import java.io.BufferedInputStream;
@@ -90,4 +100,4 @@ public class DijkstraAlgorithmTest {
 
 	}
 
-}
+}*/
