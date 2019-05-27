@@ -146,6 +146,11 @@ public abstract class ShortestPathAlgorithmTest {
             ShortestPathData secondPathData = new ShortestPathData(graph, noeudInter, destination, inspector);
             ShortestPathAlgorithm secondPathAlgo = createAlgorithm(secondPathData);
             ShortestPathSolution secondPathSoluce = secondPathAlgo.run();
+            
+            //prix du chemin direct
+            ShortestPathData directPathData = new ShortestPathData(graph, origin, destination, inspector);
+            ShortestPathAlgorithm directPathAlgo = createAlgorithm(directPathData);
+            ShortestPathSolution directPathSoluce = directPathAlgo.run();
 
             if (algoSol.isFeasible()) {
                 if(firstPathSoluce.isFeasible() && secondPathSoluce.isFeasible()) {
@@ -153,15 +158,15 @@ public abstract class ShortestPathAlgorithmTest {
                     Path firstPath = firstPathSoluce.getPath();
                     Path secondPath = secondPathSoluce.getPath();
 
-                    //Alt path is the conncatenation of firstPath and secondPath
-                    //i.e. a -> c -> b
+                    /*Le chemin alternatif est la concaténation des deux intermédiaires :
+                     * Origine -> Intermédiaire + Intermédiaire -> Destination
+                     */
                     Path altPath = Path.concatenate(firstPath, secondPath);
 
-                    //Soluce path is the direct path a-> b
-                    Path solucePath = secondPathSoluce.getPath();
+                    //Soluce path est le chemin direct Origine -> Destination
+                    Path solucePath = directPathSoluce.getPath();
 
-                    //Assert that the cost of the alternate path is at least as big as
-                    //the cost of the direct path
+                    //On vérifie que O->I->D est plus long ou égal à O->D
                     switch (data.getMode()) {
                         case TIME:
                             assertTrue(Double.compare(altPath.getMinimumTravelTime(),
