@@ -51,6 +51,8 @@ public abstract class ShortestPathAlgorithmTest {
         dest = graph1.get(17955);
         data.add(new ShortestPathData(graph1, origin, dest, arcinsp2));
 
+        
+        
         //On fait des Shortest path data avec la Map CarréDense
         reader = new BinaryGraphReader(
                 new DataInputStream(new BufferedInputStream(new FileInputStream("/home/emile/Documents/INSA/sem6/extras/carre.mapgr"))));
