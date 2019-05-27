@@ -43,7 +43,7 @@ public abstract class ShortestPathAlgorithmTest {
         //TEST [1]
         origin = graph1.get(3264);
         dest = graph1.get(835);
-        data.add(new ShortestPathData(graph1, origin, dest, arcinsp1));
+        data.add(new ShortestPathData(graph1, origin, dest, arcinsp2));
         
         //TEST [2]
         //Chemin imposible car le long du canal en voiture
@@ -64,7 +64,6 @@ public abstract class ShortestPathAlgorithmTest {
         data.add(new ShortestPathData(graph2, origin, dest, arcinsp1));
         
         //TEST [4]
-        //orig = dest
         origin = graph2.get(12);
         dest = graph2.get(16);
         data.add(new ShortestPathData(graph2, origin, dest, arcinsp1));
