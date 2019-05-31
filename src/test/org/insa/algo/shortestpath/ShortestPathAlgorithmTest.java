@@ -19,7 +19,7 @@ import java.util.Random;
 
 import static org.junit.Assert.*;
 
-@RunWith(Parameterized.class) //pour créer une liste de teste, cf test priority Queue
+@RunWith(Parameterized.class) //pour créer une liste de test, cf test priority Queue
 public abstract class ShortestPathAlgorithmTest {
 
     @Parameterized.Parameters
@@ -51,27 +51,44 @@ public abstract class ShortestPathAlgorithmTest {
         dest = graph1.get(17955);
         data.add(new ShortestPathData(graph1, origin, dest, arcinsp2));
 
+        //TEST [3] à [7]
+        Random rand = new Random();
+        for (int i = 0; i < 5; i++) {
+        	origin = graph1.get(rand.nextInt(graph1.getNodes().size()-1));
+            dest = graph1.get(rand.nextInt(graph1.getNodes().size()-1));
+            while (dest.equals(origin))
+                dest = graph1.get(rand.nextInt(graph1.getNodes().size()-1));
+            data.add(new ShortestPathData(graph1, origin, dest, arcinsp2));
+        }
         
         
         //On fait des Shortest path data avec la Map CarréDense
         reader = new BinaryGraphReader(
                 new DataInputStream(new BufferedInputStream(new FileInputStream("/home/emile/Documents/INSA/sem6/extras/carre.mapgr"))));
 
-        //TEST [3]
+        //TEST [8]
         Graph graph2 = reader.read();
-        origin = graph2.get(5);
-        dest = graph2.get(12);
-        data.add(new ShortestPathData(graph2, origin, dest, arcinsp1));
+        //TEST [8] à [12]
+        for (int i = 0; i < 5; i++) {
+        	origin = graph2.get(rand.nextInt(graph2.getNodes().size()-1));
+            dest = graph2.get(rand.nextInt(graph2.getNodes().size()-1));
+            while (dest.equals(origin))
+                dest = graph2.get(rand.nextInt(graph2.getNodes().size()-1));
+            data.add(new ShortestPathData(graph2, origin, dest, arcinsp2));
+        }
         
-        //TEST [4]
-        origin = graph2.get(12);
-        dest = graph2.get(16);
-        data.add(new ShortestPathData(graph2, origin, dest, arcinsp1));
+        //TEST [13] à [17]
+        for (int i = 0; i < 5; i++) {
+        	origin = graph2.get(rand.nextInt(graph2.getNodes().size()-1));
+            dest = graph2.get(rand.nextInt(graph2.getNodes().size()-1));
+            while (dest.equals(origin))
+                dest = graph2.get(rand.nextInt(graph2.getNodes().size()-1));
+            data.add(new ShortestPathData(graph2, origin, dest, arcinsp1));
+        }
         
-        //TEST [5]
-        origin = graph2.get(4);
-        dest = graph2.get(3);
-        data.add(new ShortestPathData(graph2, origin, dest, arcinsp2));
+        //TEST [18]  Oigine = Destination
+        dest = graph1.get(12);
+        data.add(new ShortestPathData(graph1, dest, dest, arcinsp2));
 
         return data;
     }
